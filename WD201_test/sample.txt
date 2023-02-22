@@ -1,1 +1,0 @@
-welcom to node.js stream.
