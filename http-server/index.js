@@ -39,7 +39,7 @@ http.createServer((request, response) => {
   response.writeHeader(200, { "Content-Type": "text/html" })
   switch (url) {
     case "/home":
-      response.write(projectContent)
+      response.write(homeContent)
       response.end()
       break
     case "/project":
