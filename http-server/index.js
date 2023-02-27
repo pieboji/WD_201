@@ -35,22 +35,21 @@ fs.readFile("registration.html", (err, registration) => {
 })
 
 http.createServer((request, response) => {
-  const url = request.url
-  response.writeHeader(200, { "Content-Type": "text/html" })
+  let url = request.url;
+  response.writeHeader(200, { "Content-Type": "text/html" });
   switch (url) {
     case "/project":
-      response.write(projectContent)
-      response.end()
-      break
-
+      response.write(projectContent);
+      response.end();
+      break;
     case "/registration":
-      response.write(registrationContent)
-      response.end()
-      break
-
+        response.write(registrationContent)
+        response.end()
+        break
     default:
-      response.write(homeContent)
-      response.end()
-      break
+      response.write(homeContent);
+      response.end();
+      break;
   }
-}).listen(argument.port)
+  })
+  .listen(argument.port);
