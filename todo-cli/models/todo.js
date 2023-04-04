@@ -32,28 +32,25 @@ module.exports = (sequelize, DataTypes) => {
       console.log('My Todo-list\n')
 
       console.log('Overdue')
-      const overdueArray = await Todo.overdue()
-      let todosString = overdueArray
+      let output = (await Todo.overdue())
         .map((todo) => todo.displayableString())
         .join('\n')
         .trim()
-      console.log(todosString)
+      console.log(output)
 
       console.log('\nDue Today')
-      const todayArray = await Todo.overdue()
-      todosString = todayArray
+      output = (await Todo.dueToday())
         .map((todo) => todo.displayableString())
         .join('\n')
         .trim()
-      console.log(todosString)
+      console.log(output)
 
       console.log('\nDue Later')
-      const laterArray = await Todo.overdue()
-      todosString = laterArray
+      output = (await Todo.dueLater())
         .map((todo) => todo.displayableString())
         .join('\n')
         .trim()
-      console.log(todosString)
+      console.log(output)
     }
 
     static async overdue () {
