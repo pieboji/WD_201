@@ -3,18 +3,25 @@ const express = require('express')
 const app = express()
 const { Todo } = require('./models')
 const bodyParser = require('body-parser')
+const path = require('path')
 app.use(bodyParser.json())
 
+app.set('view engine', 'ejs')
+
 app.get('/', async (request, response) => {
-  console.log('List todos')
-  try {
-    const alltodos = await Todo.getAllTodos()
-    return response.json(alltodos)
-  } catch (error) {
-    console.log(error)
-    return response.status(422).json(error)
+  const allTodos = await Todo.getAllTodos()
+  const overduetodos = await Todo.getOverdueTodos()
+  const duetodaytodos = await Todo.getTodayTodos()
+  const duelatertodos = await Todo.getDueLaterTodos()
+
+  if (request.accepts('html')) {
+    response.render('index', { allTodos, overduetodos, duetodaytodos, duelatertodos })
+  } else {
+    response.json({ allTodos })
   }
 })
+
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/todos', async function (_request, response) {
   console.log('Processing list of all Todos ...')
@@ -50,8 +57,8 @@ app.post('/todos', async function (request, response) {
 app.put('/todos/:id/markAsCompleted', async function (request, response) {
   const todo = await Todo.findByPk(request.params.id)
   try {
-    const update = await todo.markAsCompleted()
-    return response.json(update)
+    const updatedTodo = await todo.markAsCompleted()
+    return response.json(updatedTodo)
   } catch (error) {
     console.log(error)
     return response.status(422).json(error)
@@ -60,8 +67,8 @@ app.put('/todos/:id/markAsCompleted', async function (request, response) {
 app.delete('/todos/:id', async function (request, response) {
   console.log('We have to delete a Todo with ID: ', request.params.id)
   try {
-    const delte = await Todo.destroy({ where: { id: request.params.id } })
-    return response.json(delte ? true : false)
+    const isTodoDeleted = await Todo.destroy({ where: { id: request.params.id } })
+    return response.json(isTodoDeleted ? true : false)
   } catch (error) {
     console.log(error)
     return response.status(422).json(error)

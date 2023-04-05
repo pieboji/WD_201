@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "Kejl@234",
-    "database": "wd-todo-dev",
+    "password": "postgres",
+    "database": "todo-db",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "dialectOptions": { 
@@ -12,8 +12,8 @@
   },
   "test": {
     "username": "postgres",
-    "password": "Kejl@234",
-    "database": "wd-todo-test",
+    "password": "postgres",
+    "database": "todo-db",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "dialectOptions": { 
@@ -22,14 +22,7 @@
       
   },
   "production": {
-    "username": "postgres",
-    "password": "Kejl@234",
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "dialectOptions": { 
-        "requestTimeout": 5000 
-    }
-      
+    "use_env_variable" : "DATABASE_URL",
+    "dialect": "postgres"
   }
 }

@@ -1,0 +1,32 @@
+table {
+    border: 2px solid sandybrown;
+}
+
+td {
+    width: 100px;
+    height: 30px;
+}
+
+td {
+    text-align: center;
+}
+
+.Todo-Item:hover .trash-icon {
+    display: block;
+    margin-left: 24px;
+}
+
+h5 {
+    display: inline;
+}
+
+.foot {
+    margin-top: 120px;
+}
+
+.count-due-later, .count-due-today, .count-overdue {
+    background: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 10px;
+}
